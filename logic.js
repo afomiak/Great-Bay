@@ -1,14 +1,14 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
-var Table = require("");
+var Table = require("great_bay");
 
 // creat fuction 
 var connection = mysql.createConnection({
 	host:"localhost",
 	port:3306,
 	user:"root",
-	password:"",
-	database:"greatbay"
+	password:"Natu123@",
+	database:"great_bay"
 });
 
 connection.connect(function(err){
@@ -21,12 +21,12 @@ var BidonItem = function(){
 	connection.query(query, function(err, res){
 		if(err) throw err;
 		var displayTable = new Table ({
-            head: ["items", "tasks", "jobs", "projects"],
+            head: ["name", "description", "price"],
 			colWidths: [10,25,25,10,15]
 		});
 		for(var i = 0; i < res.length; i++){
 			displayTable.push(
-				[res[i].item,res[i].task, res[i].jobs, res[i].projects,]
+				[res[i].name,res[i].description, res[i].price]
 				);
 		}
 		console.log(displayTable.toString());
